@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: telegram-clone-1
+    name: tgclone
     env: node
     plan: free
     region: oregon
@@ -16,4 +16,4 @@ services:
       - key: JWT_SECRET
         value: telegram-clone-secret-key-2024-render-production-super-secure
       - key: FRONTEND_URL
-        value: https://telegram-clone-1.onrender.com
+        value: https://tgclone.onrender.com

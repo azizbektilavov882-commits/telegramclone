@@ -14,8 +14,8 @@
     "render-build": "cd frontend && npm install && npm run build && cd ../backend && npm install"
   },
   "engines": {
-    "node": "18.x",
-    "npm": ">=8.0.0"
+    "node": "20.x",
+    "npm": ">=9.0.0"
   },
   "devDependencies": {
     "concurrently": "^7.6.0"
