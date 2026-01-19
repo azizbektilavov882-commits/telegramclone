@@ -1,8 +1,29 @@
 {
-  "name": "telegram-clone",
+  "name": "tgclone",
   "version": "1.0.0",
-  "description": "Full-featured Telegram clone with login, messaging, search and more",
+  "description": "A full-featured, real-time messaging application built with modern web technologies. Experience seamless communication with a Telegram-inspired interface.",
   "main": "backend/server.js",
+  "keywords": [
+    "telegram",
+    "clone",
+    "messaging",
+    "chat",
+    "real-time",
+    "socket.io",
+    "react",
+    "nodejs",
+    "mongodb"
+  ],
+  "author": "Azizbek Tilavov <azizbektilavov882@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://tgclone.onrender.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/azizbektilavov882-commits/tgclone.git"
+  },
+  "bugs": {
+    "url": "https://github.com/azizbektilavov882-commits/tgclone/issues"
+  },
   "scripts": {
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "cd backend && npm run dev",
