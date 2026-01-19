@@ -19,8 +19,15 @@ export const SocketProvider = ({ children }) => {
 
   useEffect(() => {
     if (user) {
-      // Use relative path when served from same port, otherwise use env var
-      const socketUrl = process.env.REACT_APP_SOCKET_URL || window.location.origin;
+      // In production, use the same origin as the frontend
+      const getSocketUrl = () => {
+        if (process.env.NODE_ENV === 'production') {
+          return window.location.origin;
+        }
+        return process.env.REACT_APP_SOCKET_URL || 'http://localhost:5000';
+      };
+      
+      const socketUrl = getSocketUrl();
       const newSocket = io(socketUrl);
       setSocket(newSocket);
 

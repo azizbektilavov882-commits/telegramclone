@@ -3,8 +3,17 @@ import axios from 'axios';
 
 const AuthContext = createContext();
 
-// Configure axios base URL
-axios.defaults.baseURL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+// Configure axios base URL dynamically
+const getApiUrl = () => {
+  // In production, use the same origin as the frontend
+  if (process.env.NODE_ENV === 'production') {
+    return window.location.origin;
+  }
+  // In development, use environment variable or localhost
+  return process.env.REACT_APP_API_URL || 'http://localhost:5000';
+};
+
+axios.defaults.baseURL = getApiUrl();
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
