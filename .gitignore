@@ -103,3 +103,6 @@ backend/uploads/
 # Database files
 *.db
 *.sqlite
+# Package lock files (let npm generate fresh ones)
+package-lock.json
+*/package-lock.json
