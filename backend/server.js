@@ -22,6 +22,10 @@ const userRoutes = require('./routes/users');
 
 const app = express();
 const server = http.createServer(app);
+
+console.log('CORS origin:', process.env.FRONTEND_URL || '*');
+console.log('Environment:', process.env.NODE_ENV);
+
 const io = socketIo(server, {
   cors: {
     origin: process.env.FRONTEND_URL || '*',
@@ -64,6 +68,7 @@ if (fs.existsSync(frontendBuildPath)) {
 }
 
 // MongoDB connection
+console.log('Connecting to MongoDB:', process.env.MONGODB_URI ? 'URI provided' : 'No URI provided');
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/telegram-clone', {
   useNewUrlParser: true,
   useUnifiedTopology: true,

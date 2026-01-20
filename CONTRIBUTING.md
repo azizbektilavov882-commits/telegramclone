@@ -24,7 +24,7 @@ git checkout -b fix/your-bug-fix
 
 ### 4. Make Your Changes
 - Write clean, readable code
-- Follow the existing code style
+- Follow the existing code style c
 - Add comments where necessary
 - Test your changes thoroughly
 

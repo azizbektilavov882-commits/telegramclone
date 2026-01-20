@@ -3,6 +3,8 @@ import axios from 'axios';
 // Base API configuration - use relative path when served from same port
 const API_BASE_URL = process.env.REACT_APP_API_URL || '';
 
+console.log('API Base URL:', API_BASE_URL);
+
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 10000,
@@ -26,6 +28,7 @@ api.interceptors.request.use(
 api.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.error('API Error:', error.response?.data || error.message);
     if (error.response?.status === 401) {
       localStorage.removeItem('token');
       window.location.href = '/login';

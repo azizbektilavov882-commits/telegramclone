@@ -13,7 +13,10 @@ const getApiUrl = () => {
   return process.env.REACT_APP_API_URL || 'http://localhost:5000';
 };
 
-axios.defaults.baseURL = getApiUrl();
+// Set axios base URL
+const apiUrl = getApiUrl();
+console.log('API URL configured:', apiUrl);
+axios.defaults.baseURL = apiUrl;
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
@@ -52,6 +55,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (emailOrPhone, password) => {
     try {
+      console.log('Login attempt with API URL:', axios.defaults.baseURL);
       const response = await axios.post('/api/auth/login', { emailOrPhone, password });
       const { token, user } = response.data;
       
@@ -59,8 +63,10 @@ export const AuthProvider = ({ children }) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       setUser(user);
       
+      console.log('Login successful');
       return { success: true };
     } catch (error) {
+      console.error('Login error:', error.response?.data || error.message);
       return { 
         success: false, 
         message: error.response?.data?.message || 'Login failed' 

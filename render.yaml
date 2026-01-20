@@ -4,8 +4,16 @@ services:
     env: node
     plan: free
     region: oregon
-    buildCommand: cd frontend && npm install && npm run build && cd ../backend && npm install
-    startCommand: cd backend && node server.js
+    buildCommand: |
+      echo "Starting build process..."
+      node debug-deployment.js
+      cd frontend && npm install && npm run build
+      cd ../backend && npm install
+      echo "Build completed successfully"
+    startCommand: |
+      echo "Starting server..."
+      node debug-deployment.js
+      cd backend && node server.js
     envVars:
       - key: NODE_ENV
         value: production
@@ -16,4 +24,8 @@ services:
       - key: JWT_SECRET
         value: telegram-clone-secret-key-2024-render-production-super-secure
       - key: FRONTEND_URL
+        value: https://tgclone.onrender.com
+      - key: REACT_APP_API_URL
+        value: https://tgclone.onrender.com
+      - key: REACT_APP_SOCKET_URL
         value: https://tgclone.onrender.com

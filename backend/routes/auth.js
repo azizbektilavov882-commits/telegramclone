@@ -83,7 +83,12 @@ router.post('/login', async (req, res) => {
   try {
     const { emailOrPhone, password } = req.body;
     
-    console.log('Login attempt:', { emailOrPhone, password: password ? '***' : 'missing' });
+    console.log('Login attempt:', { 
+      emailOrPhone, 
+      password: password ? '***' : 'missing',
+      origin: req.get('origin'),
+      userAgent: req.get('user-agent')
+    });
 
     if (!emailOrPhone || !password) {
       console.log('Missing credentials');
@@ -95,12 +100,14 @@ router.post('/login', async (req, res) => {
     });
 
     if (!user) {
+      console.log('User not found:', emailOrPhone);
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
 
     if (!isPasswordValid) {
+      console.log('Invalid password for user:', user.username);
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
@@ -110,6 +117,7 @@ router.post('/login', async (req, res) => {
       { expiresIn: '7d' }
     );
 
+    console.log('Login successful for user:', user.username);
     res.json({
       token,
       user: {

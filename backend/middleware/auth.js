@@ -5,6 +5,7 @@ const auth = (req, res, next) => {
     const token = req.header('Authorization')?.replace('Bearer ', '');
     
     if (!token) {
+      console.log('No token provided');
       return res.status(401).json({ message: 'No token, authorization denied' });
     }
 
@@ -12,6 +13,7 @@ const auth = (req, res, next) => {
     req.userId = decoded.userId;
     next();
   } catch (error) {
+    console.error('Token verification error:', error.message);
     res.status(401).json({ message: 'Token is not valid' });
   }
 };
